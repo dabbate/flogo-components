@@ -1,13 +1,13 @@
 package tcmsub
 
 import (
+        "github.com/TIBCOSoftware/flogo-lib/core/activity"
+        "github.com/TIBCOSoftware/flogo-lib/logger"
+        "github.com/jvanderl/tib-eftl"
 	"crypto/tls"
 	"crypto/x509"
 	"encoding/base64"
 	"fmt"
-	"github.com/jvanderl/tib-eftl"
-	"github.com/TIBCOSoftware/flogo-lib/core/activity"
-	"github.com/TIBCOSoftware/flogo-lib/logger"
 )
 
 // log is the default package logger

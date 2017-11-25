@@ -5,7 +5,7 @@ import (
 	"crypto/x509"
 	"encoding/base64"
 	"fmt"
-
+	"github.com/jvanderl/tib-eftl"
 	"github.com/TIBCOSoftware/flogo-lib/core/activity"
 	"github.com/TIBCOSoftware/flogo-lib/logger"
 )
@@ -108,8 +108,8 @@ func (a *MyActivity) Eval(context activity.Context) (done bool, err error) {
 	} else {
 		matcher = fmt.Sprintf("{\"%s\":\"%s\"}", wsDestinationName, wsDestinationMatch)
 	}
-	durable = wsdurable // was ... handler.GetSetting("durable"))
-	if durable {
+	//durable = wsdurable // was ... handler.GetSetting("durable"))
+	if wsdurable {
 		durablename, _ := context.GetInput("durablename").(string)
 		log.Infof("Subscribing to destination: %s:%s, durable name:%s", wsDestinationName, wsDestinationMatch, durablename)
 		conn.SubscribeAsync(matcher, durablename, msgChan, subChan)
@@ -132,7 +132,8 @@ func (a *MyActivity) Eval(context activity.Context) (done bool, err error) {
 
 			//destName := handler.GetSetting("destinationname")
 			//destMatch := handler.GetSetting("destinationmatch")
-			msgName := handler.GetSetting("messagename")
+			//msgName := handler.GetSetting("messagename")
+			msgName := context.GetInput("messagename").(string)
 			if (msg[wsDestinationName].(string) == wsDestinationMatch) || (msg[wsDestinationName] != nil && wsDestinationMatch == "*") {
 				destination := wsDestinationName + "_" + wsDestinationMatch
 				message := msg[msgName].(string)

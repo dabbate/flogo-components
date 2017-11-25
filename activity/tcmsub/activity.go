@@ -134,18 +134,19 @@ func (a *MyActivity) Eval(context activity.Context) (done bool, err error) {
 			//destMatch := handler.GetSetting("destinationmatch")
 			//msgName := handler.GetSetting("messagename")
 			msgName := context.GetInput("messagename").(string)
-			if (msg[wsDestinationName].(string) == wsDestinationMatch) || (msg[wsDestinationName] != nil && wsDestinationMatch == "*") {
-				destination := wsDestinationName + "_" + wsDestinationMatch
-				message := msg[msgName].(string)
-				log.Debugf("Received message", msgName)
-				//actionId, found := t.destinationToActionId[destination]
-				// if found {
-				//log.Debugf("About to run action for Id [%s]", actionId)
-				//t.RunAction(actionId, message, destination)
-				//} else {
-				//	log.Debug("actionId not found")
-				//}
-			}
+   			log.Debugf("Received message ", msgName)
+			//if (msg[wsDestinationName].(string) == wsDestinationMatch) || (msg[wsDestinationName] != nil && wsDestinationMatch == "*") {
+			//	destination := wsDestinationName + "_" + wsDestinationMatch
+			//	message := msg[msgName].(string)
+			//	log.Debugf("Received message", msgName)
+			//	//actionId, found := t.destinationToActionId[destination]
+			//	// if found {
+			//	//log.Debugf("About to run action for Id [%s]", actionId)
+			//	//t.RunAction(actionId, message, destination)
+			//	//} else {
+			//	//	log.Debug("actionId not found")
+			//	//}
+			//}
 
 		case err := <-errChan:
 			log.Infof("connection error: %s", err)

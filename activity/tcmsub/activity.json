@@ -1,0 +1,63 @@
+{
+  "name": "tcmsub",
+  "type": "flogo:activity",
+	"display": {
+		"category": "TCM",
+		"visible": true,
+		"description": "This activity receives a message from TCM"
+	},  
+  "ref": "github.com/dabbate/flogo-components/activity/tcmsub",
+  "version": "0.0.1",
+  "title": "Receive TCM Message",
+  "description": "Receives a message from TIBCO Cloud Messaging",
+  "author": "Jan van der Lugt <jvanderl@tibco.com>",
+  "homepage": "https://github.com/dabbate/flogo-components/tree/master/activity/tcmsub" ,
+  "inputs":[
+    {
+      "name": "url",
+      "type": "string",
+      "value": ""
+    },
+    {
+      "name": "authkey",
+      "type": "string",
+      "value": ""
+    },
+    {
+      "name": "clientid",
+      "type": "string",
+      "value": ""
+    },
+    {
+      "name": "destinationname",
+      "type": "string",
+      "value": ""
+    },
+    {
+      "name": "destinationmatch",
+      "type": "string",
+      "value": ""
+    },
+    {
+      "name": "messagename",
+      "type": "string",
+      "value": ""
+    },
+    {
+      "name": "durable",
+      "type": "boolean",
+      "value": true
+    },
+    {
+      "name": "durablename",
+      "type": "string",
+      "value": ""
+    }
+  ],
+  "outputs": [
+    {
+      "name": "message",
+      "type": "string"
+    }
+  ]
+}

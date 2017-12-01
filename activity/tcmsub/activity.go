@@ -1,13 +1,13 @@
 package tcmsub
 
 import (
-        "github.com/TIBCOSoftware/flogo-lib/core/activity"
-        "github.com/TIBCOSoftware/flogo-lib/logger"
-        "github.com/jvanderl/tib-eftl"
 	"crypto/tls"
 	"crypto/x509"
 	"encoding/base64"
 	"fmt"
+
+	"github.com/TIBCOSoftware/flogo-lib/core/activity"
+	"github.com/TIBCOSoftware/flogo-lib/logger"
 )
 
 // log is the default package logger
@@ -75,7 +75,7 @@ func (a *MyActivity) Eval(context activity.Context) (done bool, err error) {
 	errChan := make(chan error, 1)
 
 	// set connection options
-	opts := &eftl.Options{
+	opts := &Options{
 		ClientID:  wsClientID,
 		Username:  "",
 		Password:  wsAuthKey,
@@ -83,7 +83,7 @@ func (a *MyActivity) Eval(context activity.Context) (done bool, err error) {
 	}
 
 	// connect to the server
-	conn, err := eftl.Connect(wsURL, opts, errChan)
+	conn, err := Connect(wsURL, opts, errChan)
 	if err != nil {
 		context.SetOutput("result", "ERR_CONNECT_HOST")
 		log.Errorf("Error connecing to TCM server: [%s]", err)
@@ -94,10 +94,10 @@ func (a *MyActivity) Eval(context activity.Context) (done bool, err error) {
 	defer conn.Disconnect()
 
 	// channel for receiving subscription response
-	subChan := make(chan *eftl.Subscription, 1)
+	subChan := make(chan *Subscription, 1)
 
 	// channel for receiving published messages
-	msgChan := make(chan eftl.Message, 1000)
+	msgChan := make(chan Message, 1000)
 
 	// destName := handler.GetSetting("destinationname") // replaced by wsDestinationName
 	// destMatch := handler.GetSetting("destinationmatch") // replaced by wsDestinationMatch
@@ -134,7 +134,7 @@ func (a *MyActivity) Eval(context activity.Context) (done bool, err error) {
 			//destMatch := handler.GetSetting("destinationmatch")
 			//msgName := handler.GetSetting("messagename")
 			msgName := context.GetInput("messagename").(string)
-   			log.Debugf("Received message ", msgName)
+			log.Debugf("Received message ", msgName)
 			//if (msg[wsDestinationName].(string) == wsDestinationMatch) || (msg[wsDestinationName] != nil && wsDestinationMatch == "*") {
 			//	destination := wsDestinationName + "_" + wsDestinationMatch
 			//	message := msg[msgName].(string)
